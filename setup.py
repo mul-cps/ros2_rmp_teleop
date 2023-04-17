@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'rmp220_teleop = rmp220_teleop.rmp220_teleop:main'
         ],
     },
 )

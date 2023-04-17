@@ -13,7 +13,7 @@ find_package(segway_msgs REQUIRED)
 ament_python_install_package(${PROJECT_NAME})
 
 # Link libraries
-target_link_libraries(rmp220_teleop)
+#target_link_libraries(rmp220_teleop)
 
 install(PROGRAMS
   rmp220_teleop/rmp220_teleop.py
