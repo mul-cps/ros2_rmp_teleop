@@ -20,10 +20,10 @@ class TeleopTwistJoy(Node):
         self.twist.angular.z = 1.0 * joy_msg.axes[0]
         if joy_msg.buttons[8]:
             self.enable = True
-            enable_chassis()
+            enable_chassis(self)
         if joy_msg.buttons[4]:
             self.enable = False
-            disable_chassis()
+            disable_chassis(self)
 
     def timer_callback(self):
         self.cmd_vel_pub.publish(self.twist)
