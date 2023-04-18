@@ -13,10 +13,17 @@ class TeleopTwistJoy(Node):
         self.joy_sub = self.create_subscription(Joy, 'joy', self.joy_callback, 10)
         self.timer = self.create_timer(0.01, self.timer_callback)
         self.twist = Twist()
+        self.enable = False
 
     def joy_callback(self, joy_msg):
         self.twist.linear.x = 1 * joy_msg.axes[1]
         self.twist.angular.z = 1.0 * joy_msg.axes[0]
+        if joy_msg.buttons[8]:
+            self.enable = True
+            enable_chassis()
+        if joy_msg.buttons[4]:
+            self.enable = False
+            disable_chassis()
 
     def timer_callback(self):
         self.cmd_vel_pub.publish(self.twist)
