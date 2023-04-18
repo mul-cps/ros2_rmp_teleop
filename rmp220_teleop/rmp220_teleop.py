@@ -18,7 +18,7 @@ class TeleopTwistJoy(Node):
     def joy_callback(self, joy_msg):
         self.twist.linear.x = 1 * joy_msg.axes[1]
         self.twist.angular.z = 1.0 * joy_msg.axes[0]
-        if joy_msg.buttons[8]:
+        if joy_msg.buttons[7]:
             self.enable = True
             enable_chassis(self)
         if joy_msg.buttons[6]:
