@@ -17,10 +17,14 @@ class TeleopTwistJoy(Node):
         self.limit = 0.5
 
     def joy_callback(self, joy_msg):
-        if joy_msg.buttons[4]: #lb
-            self.limit -= 0.5
-        if joy_msg.buttons[5]: #rb
-            self.limit += 0.5
+        # if joy_msg.buttons[4]: #lb
+        #     self.limit -= 0.5
+        #     if self.limit < 0.2:
+        #         self.limit = 0.2
+        # if joy_msg.buttons[5]: #rb
+        #     self.limit += 0.5
+        #     if self.limit > 3:
+        #         self.limit = 3
         self.twist.linear.x = self.limit * joy_msg.axes[1]
         self.twist.angular.z = self.limit * joy_msg.axes[0]
         if joy_msg.buttons[7]: #start
@@ -57,6 +61,14 @@ def main(args=None):
         teleop_twist_joy = TeleopTwistJoy()
         enable_chassis(teleop_twist_joy)  # Call the function to enable the chassis
         rclpy.spin(teleop_twist_joy)
+        if joy_msg.buttons[4]: #lb
+            self.limit -= 0.5
+            if self.limit < 0.2:
+                self.limit = 0.2
+        if joy_msg.buttons[5]: #rb
+            self.limit += 0.5
+            if self.limit > 3:
+                self.limit = 3
     except KeyboardInterrupt:
         disable_chassis(teleop_twist_joy) # chassis disable for safe close
         req = RosSetChassisEnableCmd.Request()
