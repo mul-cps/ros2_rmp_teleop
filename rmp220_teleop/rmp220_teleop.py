@@ -21,7 +21,7 @@ class TeleopTwistJoy(Node):
         if joy_msg.buttons[8]:
             self.enable = True
             enable_chassis(self)
-        if joy_msg.buttons[4]:
+        if joy_msg.buttons[6]:
             self.enable = False
             disable_chassis(self)
 
