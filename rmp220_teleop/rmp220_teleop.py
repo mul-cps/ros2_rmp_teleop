@@ -18,11 +18,11 @@ class TeleopTwistJoy(Node):
 
     def joy_callback(self, joy_msg):
         if joy_msg.buttons[4]: #lb
-            self.limit -= 0.5
+            self.limit -= 0.1
             if self.limit < 0.2:
                 self.limit = 0.2
         if joy_msg.buttons[5]: #rb
-            self.limit += 0.5
+            self.limit += 0.1
             if self.limit > 3:
                 self.limit = 3
         self.twist.linear.x = self.limit * joy_msg.axes[1]
