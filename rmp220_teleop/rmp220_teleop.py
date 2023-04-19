@@ -26,7 +26,7 @@ class TeleopTwistJoy(Node):
             if self.limit > 3:
                 self.limit = 3
         self.twist.linear.x = self.limit * joy_msg.axes[1]
-        self.twist.angular.z = self.limit * joy_msg.axes[0]
+        self.twist.angular.z = self.limit *2 * joy_msg.axes[0]
         if joy_msg.buttons[7]: #start
             self.enable = True
             enable_chassis(self)
