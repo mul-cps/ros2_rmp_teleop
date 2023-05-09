@@ -11,7 +11,7 @@ class TeleopTwistJoy(Node):
         super().__init__('teleop_twist_joy')
         self.cmd_vel_pub = self.create_publisher(Twist, '/diffbot_base_controller/cmd_vel_unstamped', 10)
         self.joy_sub = self.create_subscription(Joy, 'joy', self.joy_callback, 10)
-        self.timer = self.create_timer(0.01, self.timer_callback)
+        self.timer = self.create_timer(0.1, self.timer_callback)
         self.twist = Twist()
         self.enable = False
         self.limit = 0.5
