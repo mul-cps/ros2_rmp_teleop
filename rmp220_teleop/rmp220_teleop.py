@@ -14,7 +14,7 @@ class TeleopTwistJoy(Node):
         self.timer = self.create_timer(0.01, self.timer_callback) # 100 Hz
         self.twist = Twist()
         self.enable = False
-        self.vFactor = 1
+        self.vFactor = 1 # if compensation is needed. Not needed anymore for bot_mini
         self.limit = 1 * self.vFactor
         self.max_vel = 2 * self.vFactor
 
@@ -28,7 +28,7 @@ class TeleopTwistJoy(Node):
             if self.limit > self.max_vel:
                 self.limit = self.max_vel
         self.twist.linear.x = self.limit * joy_msg.axes[1]
-        self.twist.angular.z = self.limit * joy_msg.axes[0] * -2 #* 3.141592 #trying to compensate slower rotational movement? Must find out why!
+        self.twist.angular.z = self.limit * joy_msg.axes[0] * -1 #* 3.141592 #trying to compensate slower rotational movement? Must find out why!
         # if joy_msg.buttons[7]: #start
         #     self.enable = True
         #     enable_chassis(self)
