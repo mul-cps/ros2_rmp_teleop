@@ -11,23 +11,24 @@ class TeleopTwistJoy(Node):
         super().__init__('teleop_twist_joy')
         self.cmd_vel_pub = self.create_publisher(Twist, '/diffbot_base_controller/cmd_vel_unstamped', 10)
         self.joy_sub = self.create_subscription(Joy, 'joy', self.joy_callback, 10)
-        self.timer = self.create_timer(0.1, self.timer_callback)
+        self.timer = self.create_timer(0.01, self.timer_callback) # 100 Hz
         self.twist = Twist()
         self.enable = False
-        self.limit = 1 * 0.1
-        self.max_vel = 2 * 0.1
+        self.vFactor = 1
+        self.limit = 1 * self.vFactor
+        self.max_vel = 2 * self.vFactor
 
     def joy_callback(self, joy_msg):
         if joy_msg.buttons[4]: #lb
-            self.limit -= 0.1 * 0.1
-            if self.limit < 0.2 * 0.1:
-                self.limit = 0.2 *0.1
+            self.limit -= 0.1 * self.vFactor
+            if self.limit < 0.2 * self.vFactor:
+                self.limit = 0.2 * self.vFactor
         if joy_msg.buttons[5]: #rb
-            self.limit += 0.1 * 0.1
+            self.limit += 0.1 * self.vFactor
             if self.limit > self.max_vel:
                 self.limit = self.max_vel
         self.twist.linear.x = self.limit * joy_msg.axes[1]
-        self.twist.angular.z = -self.limit * joy_msg.axes[0] * 40
+        self.twist.angular.z = self.limit * joy_msg.axes[0] * -2 #* 3.141592 #trying to compensate slower rotational movement? Must find out why!
         # if joy_msg.buttons[7]: #start
         #     self.enable = True
         #     enable_chassis(self)
