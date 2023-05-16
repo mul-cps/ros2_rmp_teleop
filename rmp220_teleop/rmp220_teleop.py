@@ -28,7 +28,7 @@ class TeleopTwistJoy(Node):
             if self.limit > self.max_vel:
                 self.limit = self.max_vel
         self.twist.linear.x = self.limit * joy_msg.axes[1]
-        self.twist.angular.z = self.limit * joy_msg.axes[0] * -1 #* 3.141592 #trying to compensate slower rotational movement? Must find out why!
+        self.twist.angular.z = self.limit * joy_msg.axes[0] * 1 #* 3.141592 #trying to compensate slower rotational movement? Must find out why!
         # if joy_msg.buttons[7]: #start
         #     self.enable = True
         #     enable_chassis(self)
@@ -38,7 +38,6 @@ class TeleopTwistJoy(Node):
 
     def timer_callback(self):
         self.cmd_vel_pub.publish(self.twist)
-
 
 # def enable_chassis(node):
 #     chassis_enable = node.create_client(RosSetChassisEnableCmd, '/set_chassis_enable')
