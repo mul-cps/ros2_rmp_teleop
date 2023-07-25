@@ -8,7 +8,6 @@
   <license>TODO: License declaration</license>
 
   <depend>rclpy</depend>
-  <depend>segway_msgs</depend>
 
   <exec_depend>ros2launch</exec_depend>
 
