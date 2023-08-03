@@ -39,7 +39,7 @@ class TeleopTwistJoy(Node):
 
 
 def enable_chassis(node):
-    chassis_enable = node.create_client(RosSetChassisEnableCmd, '/set_chassis_enable')
+    chassis_enable = node.create_client(RosSetChassisEnableCmd, 'set_chassis_enable')
     req = RosSetChassisEnableCmd.Request()
     req.ros_set_chassis_enable_cmd = True
     while not chassis_enable.wait_for_service(timeout_sec=1.0):
@@ -47,7 +47,7 @@ def enable_chassis(node):
     chassis_enable.call_async(req)
 
 def disable_chassis(node):
-    chassis_disable = node.create_client(RosSetChassisEnableCmd, '/set_chassis_enable')
+    chassis_disable = node.create_client(RosSetChassisEnableCmd, 'set_chassis_enable')
     req = RosSetChassisEnableCmd.Request()
     req.ros_set_chassis_enable_cmd = False
     while not chassis_disable.wait_for_service(timeout_sec=1.0):
